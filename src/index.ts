@@ -1,10 +1,10 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { MyoriNFCPlugin } from './definitions';
+export interface MyoriNFCPlugin {
+  isAvailable(): Promise<{ isAvailable: boolean }>;
+  readTag(): Promise<{ tagData: string }>;
+}
 
-const MyoriNFC = registerPlugin<MyoriNFCPlugin>('MyoriNFC', {
-  web: () => import('./web').then((m) => new m.MyoriNFCWeb()),
-});
+const MyoriNFCPlugin = registerPlugin<MyoriNFCPlugin>('MyoriNFCPlugin');
 
-export * from './definitions';
-export { MyoriNFC };
+export default MyoriNFCPlugin;
